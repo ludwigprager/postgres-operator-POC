@@ -1,0 +1,10 @@
+
+# https://github.com/zalando/postgres-operator/blob/master/docs/quickstart.md
+
+# if you've created the operator using yaml manifests
+my-kubectl get pod -l name=postgres-operator
+
+# if you've created the operator using helm chart
+my-kubectl get pod -l app.kubernetes.io/name=postgres-operator
+
+my-kubectl logs "$(kubectl get pod -l name=postgres-operator --output='name')"

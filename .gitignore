@@ -1,0 +1,5 @@
+kubeconfig
+kubeconfig.*
+kubectl
+k3d
+k3d-config/postgres-operator-poc.yaml
