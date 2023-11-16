@@ -65,6 +65,7 @@ fi
 
 #./kubectl wait --for=condition=complete --timeout=30s job/myjob 
 
+echo waiting for traefik jobs to complete
 ./kubectl wait -n kube-system job.batch/helm-install-traefik-crd --for=condition=complete --timeout=600s
 ./kubectl wait -n kube-system job.batch/helm-install-traefik     --for=condition=complete --timeout=600s
 
@@ -83,13 +84,13 @@ fi
 
 
 
-kubectl apply -f manifest/ingress.yaml
-kubectl apply -f manifest/whoami.yaml
+#kubectl apply -f manifest/ingress.yaml
+#kubectl apply -f manifest/whoami.yaml
 
 #echo curl http://localhost:8081/
 #echo curl http://localhost:8081/whoami
-echo http://$(get-primary-ip):8081/
-echo http://$(get-primary-ip):8081/whoami
+#echo http://$(get-primary-ip):8081/
+#echo http://$(get-primary-ip):8081/whoami
 
 
 #./kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/e0446d7554a96f7dff95f111cfd8145318870c9c/deploy/static/provider/cloud/deploy.yaml

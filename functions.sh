@@ -46,11 +46,13 @@ export -f get-primary-ip
 
 function my-psql() {
 
+#   -e PGHOST=${PGHOST} \
+#   -e PGPORT=${PGPORT} \
   docker run --rm \
-    -e PGHOST=${PGHOST} \
-    -e PGPORT=${PGPORT} \
+    -e PGMASTER=${PGMASTER} \
     -e PGPASSWORD=${PGPASSWORD} \
     -e PGSSLMODE=${PGSSLMODE} \
+    --net=host \
     ${POC_IMAGE} \
     psql $*
 
