@@ -1,4 +1,4 @@
-# GOP-POC
+# postgres-operator-POC
 
 ## Description
 

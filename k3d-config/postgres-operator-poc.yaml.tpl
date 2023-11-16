@@ -17,6 +17,24 @@ ports:
 #        nodeFilters:
 #          - server:*
 
+options:
+  k3s: # options passed on to K3s itself
+    extraArgs: # additional arguments passed to the `k3s server|agent` command; same as `--k3s-arg`
+      - arg: "-no-deploy=traefik"
+        nodeFilters:
+          - server:*
+
+# k3s: # options passed on to K3s itself
+#   extraArgs: # additional arguments passed to the `k3s server|agent` command; same as `--k3s-arg`
+#     - --no-deploy=traefik
+#       nodeFilters:
+#         - server:*
+
+# k3s:
+#   extraServerArgs:
+#     - --tls-san=127.0.0.1
+#     - --no-deploy=traefik
+
 # https://k3d.io/v5.6.0/usage/configfile/#all-options-example
 #
 ## k3d configuration file, saved as e.g. /home/me/myk3dcluster.yaml

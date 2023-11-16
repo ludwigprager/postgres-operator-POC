@@ -23,12 +23,16 @@ echo waiting for operator to get Ready
 # ./kubectl wait pods -l name=postgres-operator --for condition=Ready
 
 # Deploy the operator UI
+envsubst < manifest/ui/manifests/ingress.yaml.tpl > manifest/ui/manifests/ingress.yaml
 ./kubectl apply -k manifest/ui/manifests/
 # ./kubectl apply -k github.com/zalando/postgres-operator/ui/manifests
 
 echo waiting for operator-ui to get Ready
 ./kubectl rollout status                         deployment/postgres-operator-ui --timeout=600s
 
-echo  ./kubectl port-forward svc/postgres-operator-ui 8081:80 --address='0.0.0.0' \&
-./kubectl port-forward svc/postgres-operator-ui 8081:80 --address='0.0.0.0' &
-echo http://$(get-primary-ip):8081
+#echo  ./kubectl port-forward svc/postgres-operator-ui 8081:80 --address='0.0.0.0' \&
+#./kubectl port-forward svc/postgres-operator-ui 8081:80 --address='0.0.0.0' &
+#echo http://$(get-primary-ip):8081
+#sensible-browser echo http://$(get-primary-ip):8081
+echo http://${DNS_DOMAIN}:8123/
+

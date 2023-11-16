@@ -8,7 +8,7 @@
 #spec:
 #  # ingressClassName: "ingress-nginx"
 #  rules:
-#    - host: domain.k3d
+#    - host: ${DNS_DOMAIN}
 #      http:
 #        paths:
 #
@@ -34,7 +34,7 @@ metadata:
 spec:
 # ingressClassName: nginx
   rules:
-    - host: domain.k3d
+    - host: ${DNS_DOMAIN}
       http:
         paths:
 
