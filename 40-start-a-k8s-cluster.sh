@@ -58,10 +58,15 @@ fi
 #kube-system   metrics-server           0/1     1            0           35s
 #kube-system   local-path-provisioner
 
-./kubectl rollout status        -n kube-system         deployment/coredns --timeout=600s
-./kubectl rollout status        -n kube-system         deployment/metrics-server --timeout=600s
-./kubectl rollout status        -n kube-system         deployment/local-path-provisioner --timeout=600s
-./kubectl rollout status        -n kube-system         deployment/traefik --timeout=600s
+#./kubectl rollout status        -n kube-system         deployment/coredns --timeout=600s
+#./kubectl rollout status        -n kube-system         deployment/metrics-server --timeout=600s
+#./kubectl rollout status        -n kube-system         deployment/local-path-provisioner --timeout=600s
+#./kubectl rollout status        -n kube-system         deployment/traefik --timeout=600s
+
+#./kubectl wait --for=condition=complete --timeout=30s job/myjob 
+
+./kubectl wait -n kube-system job.batch/helm-install-traefik-crd --for=condition=complete --timeout=600s
+./kubectl wait -n kube-system job.batch/helm-install-traefik     --for=condition=complete --timeout=600s
 
 #my-kubectl apply -f manifest/namespace.yaml
 
@@ -72,17 +77,17 @@ fi
 
 #done
 
-kubectl create deployment nginx --image=nginx --dry-run=client -o yaml | kubectl apply -f -
-./kubectl rollout status        -n default         deployment/nginx --timeout=600s
+#kubectl create service clusterip nginx --tcp=80:80 --dry-run=client -o yaml | kubectl apply -f -
+#kubectl create deployment nginx --image=nginx --dry-run=client -o yaml | kubectl apply -f -
+#./kubectl rollout status        -n default         deployment/nginx --timeout=600s
 
-kubectl create service clusterip nginx --tcp=80:80 --dry-run=client -o yaml | kubectl apply -f -
 
 
-kubectl apply -f thatfile.yaml
-kubectl apply -f whoami.yaml
+kubectl apply -f manifest/ingress.yaml
+kubectl apply -f manifest/whoami.yaml
 
-echo curl http://localhost:8081/
-echo curl http://localhost:8081/whoami
+#echo curl http://localhost:8081/
+#echo curl http://localhost:8081/whoami
 echo http://$(get-primary-ip):8081/
 echo http://$(get-primary-ip):8081/whoami
 
