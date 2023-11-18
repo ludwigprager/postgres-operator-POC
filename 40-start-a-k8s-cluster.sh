@@ -50,7 +50,7 @@ fi
 #     --api-port 6550 -p "${INGRESS_PORT}:80@loadbalancer" \
 #     --agents 2
 
-    k3d cluster create --api-port 6550 -p "8081:80@loadbalancer" --agents 2 $CLUSTER
+    ./k3d cluster create --api-port 6550 -p "8081:80@loadbalancer" --agents 2 $CLUSTER
 
   fi
 
@@ -68,29 +68,3 @@ fi
 echo waiting for traefik jobs to complete
 ./kubectl wait -n kube-system job.batch/helm-install-traefik-crd --for=condition=complete --timeout=600s
 ./kubectl wait -n kube-system job.batch/helm-install-traefik     --for=condition=complete --timeout=600s
-
-#my-kubectl apply -f manifest/namespace.yaml
-
-## create endpoint in cluster pointing to my primary IP address
-#export PRIMARY_IP=$(get-primary-ip)
-#envsubst < manifest/external-service.yaml.tpl > manifest/external-service.yaml
-#my-kubectl apply -nargocd -f manifest/external-service.yaml
-
-#done
-
-#kubectl create service clusterip nginx --tcp=80:80 --dry-run=client -o yaml | kubectl apply -f -
-#kubectl create deployment nginx --image=nginx --dry-run=client -o yaml | kubectl apply -f -
-#./kubectl rollout status        -n default         deployment/nginx --timeout=600s
-
-
-
-#kubectl apply -f manifest/ingress.yaml
-#kubectl apply -f manifest/whoami.yaml
-
-#echo curl http://localhost:8081/
-#echo curl http://localhost:8081/whoami
-#echo http://$(get-primary-ip):8081/
-#echo http://$(get-primary-ip):8081/whoami
-
-
-#./kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/e0446d7554a96f7dff95f111cfd8145318870c9c/deploy/static/provider/cloud/deploy.yaml

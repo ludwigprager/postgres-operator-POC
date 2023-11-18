@@ -27,4 +27,3 @@ echo waiting for operator-ui to get Ready
 
 echo http://$(get-primary-ip):8081/
 #echo http://$(get-primary-ip):8081/postgres-operator-ui
-

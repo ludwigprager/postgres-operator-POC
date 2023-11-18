@@ -22,7 +22,7 @@ Display URL endpoints created by this poc:
 
 ## Prerequisites
 - a linux machine. Any distribution should work fine. Or macOS with Darwin.   
-- docker, jq, envsubst installed
+- docker, psql
 
 ## How this POC works
 

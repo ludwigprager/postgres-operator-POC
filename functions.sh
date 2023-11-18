@@ -59,3 +59,19 @@ function my-psql() {
 }
 export -f my-psql
 
+function wait-for-port-forward() {
+  local localport=$1
+  local start=$(date +%s)
+  # wait for $localport to become available
+  while ! nc -vz localhost $localport > /dev/null 2>&1 ; do
+    # echo sleeping
+    sleep 0.1
+    now=$(date +%s)
+    elapsed=$(($now-$start))
+    if [[ $elapsed -gt 5 ]]; then
+      echo wait-for-port-forward timed out after 5 seconds
+      return
+    fi
+  done
+}
+

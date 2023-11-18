@@ -14,3 +14,4 @@ docker build \
 ./40-start-a-k8s-cluster.sh
 ./50-install-postgres-operator.sh
 ./60-create-postgres-cluster.sh
+./70-test.sh

@@ -11,9 +11,16 @@ spec:
     zalando:  # database owner
     - superuser
     - createdb
+    ludwigprager:  # database owner
+    - superuser
+    - createdb
+    backend:  # database owner
+    - superuser
+    - createdb
     foo_user: []  # role for application foo
   databases:
     foo: zalando  # dbname: owner
+    neo: backend  # dbname: owner
   preparedDatabases:
     bar: {}
   postgresql:
